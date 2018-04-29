@@ -1,0 +1,324 @@
+﻿@model IEnumerable<ErpDemo.Domain.Entities.Employees>
+@{
+    ViewBag.CurrentMenu = "Employees";
+}
+
+<ol class="breadcrumb" style="text-align:right; background:transparent; margin-top:-10px; margin-bottom:-10px">
+    <li><a asp-controller="Home" asp-action="About"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li class="active">HR</li>
+    <li class="active">Employees</li>
+</ol>
+
+<div class="row">
+    <div class="box-body">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">Employees</h3>
+                <div class="pull-right box-tools">
+                    <a style="visibility:hidden" id="btnRefresh" asp-controller="Employees" asp-action="Index">Refresh</a>
+                    <button id="btnAdd" class="btn btn-primary" type="button" data-original-title="New Employee" data-toggle="tooltip" data-widget="">
+                        <i class="fa fa-plus-square"></i>&nbsp;&nbsp;New Employee
+                    </button>
+                    <button id="btnDelete" title="" class="btn btn-danger" type="button" data-original-title="Delete Employees" data-toggle="tooltip" data-widget="">
+                        <i class="fa fa-times"></i>&nbsp;&nbsp;Delete Employees
+                    </button>
+                    <button id="btnLoad" title="" class="btn btn-success" type="button" data-original-title="Reload Employees" data-toggle="tooltip" data-widget="">
+                        <i class="fa fa-list"></i>&nbsp;&nbsp;Reload
+                    </button>
+                </div>
+            </div>
+            <div class="box-body">
+                <div class="table-scrollable">
+                    <table id="dataTable" class="table table-striped table-bordered table-hover dataTable no-footer" role="grid" aria-describedby="sample_2_info">
+                        <thead>
+                            <tr role="row">
+                                <th class="table-checkbox" style="width:40px;text-align:center;"><input id="checkAll" class="group-checkable" type="checkbox"></th>
+                                <th>Name</th>
+                                <th>Title</th>
+                                <th>Department</th>
+                                <th>Role</th>
+                                <th>@Html.DisplayNameFor(model => model.Phone)</th>
+                                <th>Hire Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td align="center"><input type="checkbox" class="checkboxs" value=@item.Id /></td>
+                                    <td>@Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.LastName)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Title)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Department.Name)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Role.Name)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Phone)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.HireDate)</td>
+                                    <td>
+                                        <button class="btn btn-info btn-xs" onclick='edit("@item.Id")'><i class="fa fa-edit"></i>Edit</button>
+                                        <button class="btn btn-danger btn-xs" onclick='deleteSingle("@item.Id")'><i class="fa fa-trash-o"></i>Delete</button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!--box body-->
+        </div>
+        <!--box primary-->
+    </div>
+</div>
+@Html.Partial("Edit")
+<script>
+    //debugger;
+    //datatable config
+    $(function () {
+        $("#dataTable").DataTable({
+            paging: true,
+            searching: true,
+            lengthChange: false,
+            info: true,
+            dom: "<'row'<'col-sm-3'f><'col-sm-9'lT>>" +
+            "<'row'<'col-sm-12'tr>>" +
+            "<'row'<'col-sm-6'i><'col-sm-6'p>>",
+            paging: true,
+            pagingType: "full_numbers",
+            autoWidth: false,
+            "columnDefs": [{ "sortable": false, "targets": [0, 7] }],
+            "sorting": []
+        });
+        $("#dataTable input[type=search]").css({ width: "auto" });
+    });
+
+    //Hire date picker
+    $('#HireDate').datepicker({
+        autoclose: true
+    })
+
+    $(function () {
+        $("#btnAdd").click(function () { add(); });
+        $("#btnSave").click(function () { save(); });
+        $("#btnDelete").click(function () { deleteMulti(); });
+        $("#btnLoad").click(function () {
+            refresh();
+        });
+        $("#checkAll").click(function () { checkAll(this) });
+        getDepartmentsList();
+        getRolesList();
+    });
+    //Add
+    function add() {
+        $("#Id").val("00000000-0000-0000-0000-000000000000");
+        $("#FirstName").val("");
+        $("#LastName").val("");
+        $("#DepartmentId").val("");
+        $("#RoleId").val("");
+        $("#TitleId").val("");
+        $("#Phone").val("");
+        $("#HireDate").val("");
+        $("#EmployeeId").val("");
+        $("#Description").val("");
+        //hiden
+        $("#Code").val("");
+        $("#BirthDate").val("");
+        $("#Address").val("");
+        $("#City").val("");
+        $("#Region").val("");
+        $("#PostalCode").val("");
+        $("#Country").val("");
+        $("#Extension").val("");
+        $("#Photo").val("");
+        $("#Notes").val("");
+        $("#ReportsTo").val("");
+        $("#PhotoPath").val("");
+        $("#IsValid").val("");
+        $("#CreatedTime").val("");
+        $("#ModifiedTime").val("");
+        //Pop up add modal
+        $("#Title").text("New Employee");
+        $("#editModal").modal("show");
+    };
+
+    //Edit
+    function edit(id) {
+        $.ajax({
+            type: "Get",
+            url: "/Employees/Get?id=" + id + "&_t=" + new Date(),
+            success: function (data) {
+                //visible
+                $("#Id").val(data.id);
+                $("#FirstName").val(data.firstName);
+                $("#LastName").val(data.lastName);
+                $("#DepartmentId").val(data.departmentId);
+                $("#RoleId").val(data.roleId);
+                $("#TitleId").val(data.title);
+                $("#Phone").val(data.phone);
+                var date = new Date(data.hireDate);
+                var mon = date.getMonth() + 1;
+                var day = date.getDate();
+                var nowDay = (mon < 10 ? "0" + mon : mon) + "/" + (day < 10 ? "0" + day : day) + "/" + date.getFullYear();
+                $("#HireDate").datepicker("setDate", nowDay);
+                $("#EmployeeId").val(data.employeeId);
+                $("#Description").val(data.description);
+                //hiden
+
+                $("#Code").val(data.code);
+                $("#BirthDate").val(data.birthDate);
+                $("#Address").val(data.address);
+                $("#City").val(data.city);
+                $("#Region").val(data.region);
+                $("#PostalCode").val(data.postalCode);
+                $("#Country").val(data.country);
+                $("#Extension").val(data.extension);
+                $("#Photo").val(data.photo);
+                $("#Notes").val(data.notes);
+                $("#ReportsTo").val(data.reportsTo);
+                $("#PhotoPath").val(data.photoPath);
+                $("#IsValid").val(data.isValid);
+                $("#CreatedTime").val(data.createdTime);
+                $("#ModifiedTime").val(data.modifiedTime);
+                //Pop up add modal
+                $("#Title").text("Edit Employee");
+                $("#editModal").modal("show");
+            }
+        })
+    };
+
+    //Save
+    function save() {
+        var postData = {
+            "dto": {
+                "Id": $("#Id").val(), "FirstName": $("#FirstName").val(), "LastName": $("#LastName").val(),
+                "DepartmentId": $("#DepartmentId").val(), "RoleId": $("#RoleId").val(), "Title": $("#TitleId").val(),
+                "Phone": $("#Phone").val(), "HireDate": $("#HireDate").val(), "EmployeeId": $("#EmployeeId").val(),
+                "Description": $("#Description").val(), "Code": $("#Code").val(), "BirthDate": $("#BirthDate").val(),
+                "Address": $("#Address").val(), "City": $("#City").val(), "Region": $("#Region").val(), "PostalCode": $("#PostalCode").val(),
+                "Country": $("#Country").val(), "Extension": $("#Extension").val(), "Photo": $("#Photo").val(),
+                "Notes": $("#Notes").val(), "ReportsTo": $("#ReportsTo").val(), "PhotoPath": $("#PhotoPath").val(), "IsValid": $("#IsValid").val(),
+                "CreatedTime": $("#CreatedTime").val(), "ModifiedTime": $("#ModifiedTime").val()
+            }
+        };
+        $.ajax({
+            type: "Post",
+            url: "/Employees/Edit",
+            data: postData,
+            success: function (data) {
+                if (data.result == "Success") {
+                    refresh();
+                    $("#editModal").modal("hide");
+                } else {
+                    layer.tips(data.message, "#btnSave");
+                };
+            }
+        });
+    };
+
+    //Delete multi items
+    function deleteMulti() {
+        var ids = "";
+        $(".checkboxs").each(function () {
+            if ($(this).prop("checked") == true) {
+                ids += $(this).val() + ","
+            }
+        });
+        ids = ids.substring(0, ids.length - 1);
+        if (ids.length == 0) {
+            layer.alert("Please select items.");
+            return;
+        };
+        //Confirm message
+        layer.confirm("Confirm to delete the employees?", {
+            btn: ["Confirm", "Cancel"]
+        }, function () {
+            var sendData = { "ids": ids };
+            $.ajax({
+                type: "Post",
+                url: "/Employees/DeleteMuti",
+                data: sendData,
+                success: function (data) {
+                    if (data.result == "Success") {
+                        refresh();
+                        layer.closeAll();
+                    }
+                    else {
+                        layer.alert("Delete failed!" + " " + data.message);
+                    }
+                }
+            });
+        });
+    };
+
+    //Delete single item
+    function deleteSingle(id) {
+        layer.confirm("Confirm to delete the employee?", {
+            btn: ["Confirm", "Cancel"]
+        }, function () {
+            $.ajax({
+                type: "POST",
+                url: "/Employees/Delete",
+                data: { "id": id },
+                success: function (data) {
+                    if (data.result == "Success") {
+                        refresh();
+                        layer.closeAll();
+                    }
+                    else {
+                        layer.alert("Delete failed!" + " " + data.message);
+                    }
+                }
+            })
+        });
+    };
+
+    //Refresh
+    function refresh() {
+        document.getElementById('btnRefresh').click();
+    };
+
+    //Check all
+    function checkAll(obj) {
+        $(".checkboxs").each(function () {
+            if (obj.checked == true) {
+                $(this).prop("checked", true)
+
+            }
+            if (obj.checked == false) {
+                $(this).prop("checked", false)
+            }
+        });
+    };
+
+    //Get departments list
+    function getDepartmentsList() {
+        $.ajax({
+            type: "Get",
+            url: "/Employees/GetAllDepartmentsList?_t=" + new Date().getTime(),    //Get data ajax request url
+            success: function (data) {
+                //$("#CategoryId").append("<option value='" + "'>" + "</option>");
+                $.each(data, function (index, value) {
+                    $("#DepartmentId").append("<option value='" + value.id + "'>" + value.text + "</option>");
+                })
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert(errorThrown);
+            }
+        });
+    };
+
+    //Get roles list
+    function getRolesList() {
+        $.ajax({
+            type: "Get",
+            url: "/Employees/GetAllRolesList?_t=" + new Date().getTime(),    //Get data ajax request url
+            success: function (data) {
+                //$("#SupplierId").append("<option value='" + "'>" + "</option>");
+                $.each(data, function (index, value) {
+                    $("#RoleId").append("<option value='" + value.id + "'>" + value.text + "</option>");
+                })
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert(errorThrown);
+            }
+        });
+    };
+</script>

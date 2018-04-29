@@ -1,0 +1,11 @@
+C:\Users\Gordon Duan\source\repos\ErpDemo\ErpDemo.EntityFrameworkCore\bin\Release\netcoreapp2.0\ErpDemo.EntityFrameworkCore.deps.json
+C:\Users\Gordon Duan\source\repos\ErpDemo\ErpDemo.EntityFrameworkCore\bin\Release\netcoreapp2.0\ErpDemo.EntityFrameworkCore.dll
+C:\Users\Gordon Duan\source\repos\ErpDemo\ErpDemo.EntityFrameworkCore\bin\Release\netcoreapp2.0\ErpDemo.EntityFrameworkCore.pdb
+C:\Users\Gordon Duan\source\repos\ErpDemo\ErpDemo.EntityFrameworkCore\bin\Release\netcoreapp2.0\ErpDemo.Domain.dll
+C:\Users\Gordon Duan\source\repos\ErpDemo\ErpDemo.EntityFrameworkCore\bin\Release\netcoreapp2.0\ErpDemo.Domain.pdb
+C:\Users\Gordon Duan\source\repos\ErpDemo\ErpDemo.EntityFrameworkCore\obj\Release\netcoreapp2.0\ErpDemo.EntityFrameworkCore.csproj.CoreCompileInputs.cache
+C:\Users\Gordon Duan\source\repos\ErpDemo\ErpDemo.EntityFrameworkCore\obj\Release\netcoreapp2.0\ErpDemo.EntityFrameworkCore.AssemblyInfoInputs.cache
+C:\Users\Gordon Duan\source\repos\ErpDemo\ErpDemo.EntityFrameworkCore\obj\Release\netcoreapp2.0\ErpDemo.EntityFrameworkCore.AssemblyInfo.cs
+C:\Users\Gordon Duan\source\repos\ErpDemo\ErpDemo.EntityFrameworkCore\obj\Release\netcoreapp2.0\ErpDemo.EntityFrameworkCore.dll
+C:\Users\Gordon Duan\source\repos\ErpDemo\ErpDemo.EntityFrameworkCore\obj\Release\netcoreapp2.0\ErpDemo.EntityFrameworkCore.pdb
+C:\Users\Gordon Duan\source\repos\ErpDemo\ErpDemo.EntityFrameworkCore\obj\Release\netcoreapp2.0\ErpDemo.EntityFrameworkCore.csprojResolveAssemblyReference.cache

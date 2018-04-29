@@ -1,0 +1,14 @@
+{
+  "name": "asp.net",
+  "private": true,
+  "dependencies": {
+    "admin-lte": "v2.4.3",
+    "layer": "v3.1.1",
+    "jquery.cookie": "jquery-cookie#v1.4.1",
+    "jstree": "3.3.5",
+    "bootstrap-paginator": "v0.5"
+  },
+  "resolutions": {
+    "jquery": ">= 1.2.6"
+  }
+}

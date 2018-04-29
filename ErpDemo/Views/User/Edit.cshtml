@@ -1,0 +1,66 @@
+﻿<div id="editModal" tabindex="-1" class="modal fade in" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="box box-info">
+            <div class="box-header with-border">
+                <h5 class="box-title" id="Title"></h5>
+                <button class="close" aria-label="Close" type="button" data-dismiss="modal">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <form class="form-horizontal">
+                <input type="hidden" id="Id" />
+                <input type="hidden" id="DepartmentId" />
+                <div class="box-body">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="inputPassword3">UserName</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" id="UserName" type="text" placeholder="UserName" maxlength="50">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="">Password</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" id="Password" type="password" placeholder="Password" maxlength="30">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="">Name</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" id="Name" type="text" maxlength="50">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="">Email</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" id="Email" type="text" maxlength="50">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="">Phone</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" id="MobileNumber" type="text" maxlength="24">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="">Role</label>
+                        <div class="col-sm-10">
+                            <select id="Role" class="form-control" style="padding:0px;width:100%" multiple="multiple"></select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="">Description</label>
+                        <div class="col-sm-10">
+                            <textarea id="Remarks" class="form-control" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="box-footer">
+                    <div class="pull-right box-tools">
+                        <button id="btnSave" class="btn btn-primary" type="button">Save</button>
+                        <button class="btn btn-default" type="button" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

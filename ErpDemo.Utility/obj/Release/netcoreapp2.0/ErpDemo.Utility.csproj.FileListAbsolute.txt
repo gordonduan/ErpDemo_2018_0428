@@ -1,0 +1,13 @@
+C:\Users\Gordon Duan\source\repos\ErpDemo\ErpDemo.Utility\bin\Release\netcoreapp2.0\ErpDemo.Utility.deps.json
+C:\Users\Gordon Duan\source\repos\ErpDemo\ErpDemo.Utility\bin\Release\netcoreapp2.0\ErpDemo.Utility.dll
+C:\Users\Gordon Duan\source\repos\ErpDemo\ErpDemo.Utility\bin\Release\netcoreapp2.0\ErpDemo.Utility.pdb
+C:\Users\Gordon Duan\source\repos\ErpDemo\ErpDemo.Utility\bin\Release\netcoreapp2.0\ErpDemo.Domain.dll
+C:\Users\Gordon Duan\source\repos\ErpDemo\ErpDemo.Utility\bin\Release\netcoreapp2.0\Newtonsoft.Json.dll
+C:\Users\Gordon Duan\source\repos\ErpDemo\ErpDemo.Utility\bin\Release\netcoreapp2.0\ErpDemo.Domain.pdb
+C:\Users\Gordon Duan\source\repos\ErpDemo\ErpDemo.Utility\bin\Release\netcoreapp2.0\Newtonsoft.Json.xml
+C:\Users\Gordon Duan\source\repos\ErpDemo\ErpDemo.Utility\obj\Release\netcoreapp2.0\ErpDemo.Utility.csproj.CoreCompileInputs.cache
+C:\Users\Gordon Duan\source\repos\ErpDemo\ErpDemo.Utility\obj\Release\netcoreapp2.0\ErpDemo.Utility.AssemblyInfoInputs.cache
+C:\Users\Gordon Duan\source\repos\ErpDemo\ErpDemo.Utility\obj\Release\netcoreapp2.0\ErpDemo.Utility.AssemblyInfo.cs
+C:\Users\Gordon Duan\source\repos\ErpDemo\ErpDemo.Utility\obj\Release\netcoreapp2.0\ErpDemo.Utility.dll
+C:\Users\Gordon Duan\source\repos\ErpDemo\ErpDemo.Utility\obj\Release\netcoreapp2.0\ErpDemo.Utility.pdb
+C:\Users\Gordon Duan\source\repos\ErpDemo\ErpDemo.Utility\obj\Release\netcoreapp2.0\ErpDemo.Utility.csprojResolveAssemblyReference.cache

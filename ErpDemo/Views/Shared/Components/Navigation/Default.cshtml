@@ -1,0 +1,41 @@
+﻿@model List<ErpDemo.Domain.Entities.MenuViewModel>
+
+@foreach (var menu in Model)
+{
+    <li class="treeview" id="@menu.Name@menu.Code">
+        <a asp-controller="@menu.Url">
+            <i class="@menu.Icon"></i> <span>@menu.Name</span>
+            <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+            </span>
+        </a>
+        @if (menu.Children.Any())
+        {
+            <ul class="treeview-menu">
+                @foreach (var childmenu in menu.Children)
+                {
+                    @if (childmenu.Url != null)
+                    {
+                        @if (childmenu.Url.Contains("/"))
+                        {
+                            var controller = childmenu.Url.Substring(0,childmenu.Url.LastIndexOf("/"));
+                            var action = childmenu.Url.Substring(childmenu.Url.LastIndexOf("/") + 1);
+                            var isActive = ViewBag.CurrentMenu == childmenu.Code; //Current menu is active or not
+                            <li class="@(isActive ? "active" : "")"><a asp-controller="@controller" asp-action="@action"><i class="@childmenu.Icon"></i> <span>@childmenu.Name</span></a></li>
+                        } else
+                        {
+                            var isActive = ViewBag.CurrentMenu == childmenu.Code; //Current menu is active or not
+                            <li style = "padding-left:50px" class="@(isActive ? "active" : "")"><a asp-controller="@childmenu.Url"><i class="@childmenu.Icon"></i> <span>@childmenu.Name</span></a></li>
+                            @*< li >< a asp - controller = "@childmenu.Url" >< i class="@childmenu.Icon"></i> <span>@childmenu.Name</span></a></li>*@
+                        }
+                    }
+                    else
+                    {
+                        var isActive = ViewBag.CurrentMenu == childmenu.Code; //Current menu is active or not
+                        <li class="@(isActive ? "active" : "")"><a asp-controller="Home" asp-action="About"><i class="@childmenu.Icon"></i> <span>@childmenu.Name</span></a></li>
+                    }
+                }
+            </ul>
+        }
+    </li>
+}

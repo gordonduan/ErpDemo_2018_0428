@@ -1,0 +1,259 @@
+﻿@model IEnumerable<ErpDemo.Application.CustomerApp.Dtos.CustomersDto>
+
+@{
+    ViewBag.CurrentMenu = "Customers";
+}
+
+<ol class="breadcrumb" style="text-align:right; background:transparent; margin-top:-10px; margin-bottom:-10px">
+    <li><a asp-controller="Home" asp-action="About"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li class="active">Business</li>
+    <li class="active">Customers</li>
+</ol>
+
+<div class="row">
+    <div class="box-body">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">Customers</h3>
+                <div class="pull-right box-tools">
+                    <a style="visibility:hidden" id="btnRefresh" asp-controller="CUstomers" asp-action="Index">Refresh</a>
+                    <button id="btnAdd" class="btn btn-primary" type="button" data-original-title="New Customer" data-toggle="tooltip" data-widget="">
+                        <i class="fa fa-plus-square"></i>&nbsp;&nbsp;New customer
+                    </button>
+                    <button id="btnDelete" title="" class="btn btn-danger" type="button" data-original-title="Delete CUstomers" data-toggle="tooltip" data-widget="">
+                        <i class="fa fa-times"></i>&nbsp;&nbsp;Delete Customers
+                    </button>
+                    <button id="btnLoad" title="" class="btn btn-success" type="button" data-original-title="Reload Customers" data-toggle="tooltip" data-widget="">
+                        <i class="fa fa-list"></i>&nbsp;&nbsp;Reload
+                    </button>
+                </div>
+            </div>
+            <div class="box-body">
+                <div class="table-scrollable">
+                    <table id="dataTable" class="table table-striped table-bordered table-hover dataTable no-footer" role="grid" aria-describedby="sample_2_info">
+                        <thead>
+                            <tr role="row">
+                                <th class="table-checkbox" style="width:40px;text-align:center;"><input id="checkAll" class="group-checkable" type="checkbox"></th>
+                                <th>@Html.DisplayNameFor(model => model.CustomerName)</th>
+                                <th>@Html.DisplayNameFor(model => model.ContactName)</th>
+                                <th>@Html.DisplayNameFor(model => model.City)</th>
+                                <th>@Html.DisplayNameFor(model => model.Country)</th>
+                                <th>@Html.DisplayNameFor(model => model.Phone)</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                            <tr>
+                                <td align="center"><input type="checkbox" class="checkboxs" value=@item.Id /></td>
+                                <td>@Html.DisplayFor(modelItem => item.CustomerName)</td>
+                                <td>@Html.DisplayFor(modelItem => item.ContactName)</td>
+                                <td>@Html.DisplayFor(modelItem => item.City)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Country)</td>
+                                <td>@Html.DisplayFor(modelItem => item.Phone)</td>
+                                <td>
+                                    <button class="btn btn-info btn-xs" onclick='edit("@item.Id")'><i class="fa fa-edit"></i>Edit</button>
+                                    <button class="btn btn-danger btn-xs" onclick='deleteSingle("@item.Id")'><i class="fa fa-trash-o"></i>Delete</button>
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!--box body-->
+        </div>
+        <!--box primary-->
+    </div>
+</div>
+@Html.Partial("Edit")
+<script>
+    $(function () {
+        $("#dataTable").DataTable({
+            paging: true,
+            searching: true,
+            lengthChange: false,
+            info: true,
+            dom: "<'row'<'col-sm-3'f><'col-sm-9'lT>>" +
+            "<'row'<'col-sm-12'tr>>" +
+            "<'row'<'col-sm-6'i><'col-sm-6'p>>",
+            paging: true,
+            pagingType: "full_numbers",
+            autoWidth: false,
+            "columnDefs": [{ "sortable": false, "targets": [0, 6] }],
+            "sorting": []
+        });
+        $("#dataTable input[type=search]").css({ width: "auto" });
+    });
+
+    $(function () {
+        $("#btnAdd").click(function () { add(); });
+        $("#btnSave").click(function () { save(); });
+        $("#btnDelete").click(function () { deleteMulti(); });
+        $("#btnLoad").click(function () {
+            refresh();
+        });
+        $("#checkAll").click(function () { checkAll(this) });
+    });
+    //Add
+    function add() {
+        $("#Id").val("00000000-0000-0000-0000-000000000000");
+        $("#Name").val("");
+        $("#ContactName").val("");
+        $("#PostalCode").val("");
+        $("#Address").val("");
+        $("#Country").val("");
+        $("#City").val("");
+        $("#ContactNumber").val("");
+        $("#Fax").val("");
+        $("#Region").val("");
+        $("#Remarks").val("");
+        $("#Title").text("New Customer");
+        //hiden
+        $("#Code").val("");
+        $("#CustomerId").val("");
+        $("#ContactTitle").val("");
+        $("#IsValid").val("");
+        $("#CreatedTime").val("");
+        $("#ModifiedTime").val("");
+        //Pop up add modal
+        $("#Title").text("New Customer");
+        $("#editModal").modal("show");
+    };
+
+    //Edit
+    function edit(id) {
+        $.ajax({
+            type: "Get",
+            url: "/Customers/Get?id=" + id + "&_t=" + new Date(),
+            success: function (data) {
+                //visible
+                $("#Id").val(data.id);
+                $("#Name").val(data.customerName);
+                $("#ContactName").val(data.contactName);
+                $("#PostalCode").val(data.postalCode);
+                $("#Address").val(data.address);
+                $("#Country").val(data.country);
+                $("#City").val(data.city);
+                $("#ContactNumber").val(data.phone);
+                $("#Fax").val(data.fax);
+                $("#Region").val(data.region);
+                $("#Remarks").val(data.remarks);
+                //hiden
+                $("#Code").val(data.code);
+                $("#CustomerId").val(data.customerId);
+                $("#ContactTitle").val(data.contactTitle);
+                $("#IsValid").val(data.isValid);
+                $("#CreatedTime").val(data.createdTime);
+                $("#ModifiedTime").val(data.modifiedTime);
+                //Pop up add modal
+                $("#Title").text("Edit Customer");
+                $("#editModal").modal("show");
+            }
+        })
+    };
+
+    //Save
+    function save() {
+        var postData = {
+            "dto": {
+                "Id": $("#Id").val(), "CustomerName": $("#Name").val(), "ContactName": $("#ContactName").val(),
+                "PostalCode": $("#PostalCode").val(), "Address": $("#Address").val(), "Country": $("#Country").val(),
+                "City": $("#City").val(), "Phone": $("#ContactNumber").val(), "Fax": $("#Fax").val(),
+                "Region": $("#Region").val(), "Remarks": $("#Remarks").val(), "Code": $("#Code").val(),
+                "CustomerId": $("#CustomerId").val(), "ContactTitle": $("#ContactTitle").val(),
+                "IsValid": $("#IsValid").val(), "CreatedTime": $("#CreatedTime").val(), "ModifiedTime": $("#ModifiedTime").val()
+            }
+        };
+        $.ajax({
+            type: "Post",
+            url: "/Customers/Edit",
+            data: postData,
+            success: function (data) {
+                if (data.result == "Success") {
+                    refresh();
+                    $("#editModal").modal("hide");
+                } else {
+                    layer.tips(data.message, "#btnSave");
+                };
+            }
+        });
+    };
+
+    //Delete multi items
+    function deleteMulti() {
+        var ids = "";
+        $(".checkboxs").each(function () {
+            if ($(this).prop("checked") == true) {
+                ids += $(this).val() + ","
+            }
+        });
+        ids = ids.substring(0, ids.length - 1);
+        if (ids.length == 0) {
+            layer.alert("Please select items.");
+            return;
+        };
+        //Confirm message
+        layer.confirm("Confirm to delete the Customers?", {
+            btn: ["Confirm", "Cancel"]
+        }, function () {
+            var sendData = { "ids": ids };
+            $.ajax({
+                type: "Post",
+                url: "/Customers/DeleteMuti",
+                data: sendData,
+                success: function (data) {
+                    if (data.result == "Success") {
+                        refresh();
+                        layer.closeAll();
+                    }
+                    else {
+                        layer.alert("Delete failed!" + " " + data.message);
+                    }
+                }
+            });
+        });
+    };
+
+    //Delete single item
+    function deleteSingle(id) {
+        layer.confirm("Confirm to delete the Customer?", {
+            btn: ["Confirm", "Cancel"]
+        }, function () {
+            $.ajax({
+                type: "POST",
+                url: "/Customers/Delete",
+                data: { "id": id },
+                success: function (data) {
+                    if (data.result == "Success") {
+                        refresh();
+                        layer.closeAll();
+                    }
+                    else {
+                        layer.alert("Delete failed!" + " " + data.message);
+                    }
+                }
+            })
+        });
+    };
+
+    //Refresh
+    function refresh() {
+        document.getElementById('btnRefresh').click();
+    };
+
+    //Check all
+    function checkAll(obj) {
+        $(".checkboxs").each(function () {
+            if (obj.checked == true) {
+                $(this).prop("checked", true)
+
+            }
+            if (obj.checked == false) {
+                $(this).prop("checked", false)
+            }
+        });
+    };
+
+</script>

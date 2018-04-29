@@ -1,0 +1,100 @@
+﻿@*@model ErpDemo.Domain.Entities.Suppliers*@
+
+<div id="editModal" tabindex="-1" class="modal fade in" aria-hidden="true">
+    <div class="modal-dialog" style="width: 680px;">
+        <div class="box box-info">
+            <div class="box-header with-border">
+                <h5 class="box-title" id="Title"></h5>
+                <button class="close" aria-label="Close" type="button" data-dismiss="modal">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <form class="form-horizontal">
+                <input type="hidden" id="Id" />
+                <input type="hidden" id="Code" />
+                <input type="hidden" id="OrderId" />
+                <input type="hidden" id="OrderDate" />
+                <input type="hidden" id="RequiredDate" />
+                <input type="hidden" id="ShippedDate" />
+                <input type="hidden" id="ShipVia" />
+                <input type="hidden" id="Freight" />
+                <input type="hidden" id="ShipName" />
+                <input type="hidden" id="ShipCity" />
+                <input type="hidden" id="ShipRegion" />
+                <input type="hidden" id="ShipPostalCode" />
+                <input type="hidden" id="ShipCountry" />
+                <input type="hidden" id="IsValid" />
+                <input type="hidden" id="CreatedTime" />
+                <input type="hidden" id="ModifiedTime" />
+                @*<input type='number' value='' oninput='if(value.length>11)value=value.slice(0,11)' />*@
+                <div class="box-body">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="">Customer</label>
+                        <div class="col-sm-4">
+                            <select class="form-control" id="CustomerId">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                        <label class="col-sm-2 control-label" for="">Order Type</label>
+                        <div class="col-sm-4">
+                            <select class="form-control" id="OrderType">
+                                <option value="0">Purchasing Order</option>
+                                <option value="1">Sales Order</option>
+                            </select>
+                        </div>
+                    </div>
+                    @*<div class="form-group">
+                <label class="col-sm-2 control-label" for="">Order Date</label>
+                <div class="col-sm-4">
+                    <input class="form-control" id="OrderDate" type="text" placeholder="Order Date" maxlength="40">
+                </div>
+                <label class="col-sm-2 control-label" for="">Ship Date</label>
+                <div class="col-sm-4">
+                    <input class="form-control" id="ShippedDate" type="text" placeholder="Ship Date" maxlength="40">
+                </div>
+            </div>*@
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="">Order Status</label>
+                        <div class="col-sm-3">
+                            <select class="form-control" id="OrderStatus" disabled="disabled" style="background: transparent; -webkit-appearance:none; -moz-appearance:none;">
+                                <option value="0">Pending</option>
+                                <option value="1">Approved</option>
+                                <option value="2">Processing</option>
+                                <option value="3">Shipping</option>
+                                <option value="4">Completion</option>
+                            </select>
+                        </div>
+                        <label class="col-sm-2 control-label" for="">Address</label>
+                        <div class="col-sm-5">
+                            <input class="form-control" id="ShipAddress" type="text" placeholder="Ship Address" maxlength="60">
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="table-scrollable" style="margin-bottom: 20px">
+                        <table id="tableBody" class="table table-striped table-bordered table-hover dataTable no-footer" role="grid" aria-describedby="sample_2_info">
+                            <thead>
+                                <tr role="row">
+                                    <th>Rows</th>
+                                    <th>Product</th>
+                                    <th>UnitPrice</th>
+                                    <th>Quantity</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <div class="box-footer">
+                        <div class="pull-right box-tools">
+                            <button id="btnInsert" class="btn btn-primary" type="button">Insert</button>
+                            <button id="btnSave" class="btn btn-success" type="button">Save</button>
+                            <button id="btnApprove" class="btn btn-danger" type="button">Approve</button>
+                            <button class="btn btn-default" type="button" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+</div>

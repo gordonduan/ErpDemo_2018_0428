@@ -1,0 +1,36 @@
+{
+    "compilerOptions": {
+        "allowJs": true,
+        "allowSyntheticDefaultImports": true,
+        "maxNodeModuleJsDepth": 2,
+        "noEmit": true,
+        "skipLibCheck": true
+    },
+    "files": [
+        "wwwroot/lib/jquery/dist/jquery.min.js",
+        "wwwroot/lib/bootstrap/dist/js/bootstrap.min.js",
+        "wwwroot/lib/admin-lte/plugins/iCheck/icheck.min.js",
+        "wwwroot/lib/layer/dist/layer.js",
+        "wwwroot/lib/jquery.cookie/jquery.cookie.js",
+        "wwwroot/lib/admin-lte/dist/js/adminlte.min.js",
+        "wwwroot/lib/jstree/dist/jstree.js",
+        "wwwroot/lib/jquery-validation/dist/jquery.validate.js",
+        "wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
+        "wwwroot/lib/bootstrap-paginator/src/bootstrap-paginator.js",
+        "Views/Categories/Index.js",
+        "Views/Customers/Index.js",
+        "Views/Department/Index.js",
+        "Views/Employees/Index.js",
+        "Views/Menu/Index.js",
+        "Views/Orders/Index.js",
+        "Views/Products/Index.js",
+        "Views/Role/Index.js",
+        "Views/Sales/Index.js",
+        "Views/Stocks/Index.js",
+        "Views/Suppliers/Index.js",
+        "Views/User/Index.js"
+    ],
+    "exclude": [
+
+    ]
+}

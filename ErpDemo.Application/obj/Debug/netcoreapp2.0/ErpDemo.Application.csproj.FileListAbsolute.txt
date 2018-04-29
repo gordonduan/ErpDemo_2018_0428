@@ -1,0 +1,11 @@
+c:\Users\gordon duan\source\repos\ErpDemo\ErpDemo.Application\bin\Debug\netcoreapp2.0\ErpDemo.Application.deps.json
+c:\Users\gordon duan\source\repos\ErpDemo\ErpDemo.Application\bin\Debug\netcoreapp2.0\ErpDemo.Application.dll
+c:\Users\gordon duan\source\repos\ErpDemo\ErpDemo.Application\bin\Debug\netcoreapp2.0\ErpDemo.Application.pdb
+c:\Users\gordon duan\source\repos\ErpDemo\ErpDemo.Application\obj\Debug\netcoreapp2.0\ErpDemo.Application.csprojResolveAssemblyReference.cache
+c:\Users\gordon duan\source\repos\ErpDemo\ErpDemo.Application\obj\Debug\netcoreapp2.0\ErpDemo.Application.csproj.CoreCompileInputs.cache
+c:\Users\gordon duan\source\repos\ErpDemo\ErpDemo.Application\obj\Debug\netcoreapp2.0\ErpDemo.Application.AssemblyInfoInputs.cache
+c:\Users\gordon duan\source\repos\ErpDemo\ErpDemo.Application\obj\Debug\netcoreapp2.0\ErpDemo.Application.AssemblyInfo.cs
+c:\Users\gordon duan\source\repos\ErpDemo\ErpDemo.Application\obj\Debug\netcoreapp2.0\ErpDemo.Application.dll
+c:\Users\gordon duan\source\repos\ErpDemo\ErpDemo.Application\obj\Debug\netcoreapp2.0\ErpDemo.Application.pdb
+C:\Users\Gordon Duan\source\repos\ErpDemo\ErpDemo.Application\bin\Debug\netcoreapp2.0\ErpDemo.Domain.dll
+C:\Users\Gordon Duan\source\repos\ErpDemo\ErpDemo.Application\bin\Debug\netcoreapp2.0\ErpDemo.Domain.pdb
